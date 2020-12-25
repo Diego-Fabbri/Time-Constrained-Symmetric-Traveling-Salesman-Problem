@@ -43,7 +43,7 @@ public class TSPTW_Model {
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
 
-                y[i][j] = (IloIntVar) model.numVar(0, 0, IloNumVarType.Int, "y[" + i + "][" + j + "]");
+                y[i][j] = (IloIntVar) model.numVar(0, 1, IloNumVarType.Int, "y[" + i + "][" + j + "]");
             }
 
         }
@@ -131,6 +131,13 @@ public class TSPTW_Model {
         model.exportModel("STSPTW_Problem.lp");
 
         model.solve();
+         for (int i = 0; i < n; i++) {
+                System.out.println("Node: " + i);
+                for (int j = 0; j < n; j++) {
+                    System.out.print(" " + travel_time[i][j] + " ");
+                }
+                System.out.println();
+            }
 
         if (model.getStatus() == IloCplex.Status.Feasible
                 | model.getStatus() == IloCplex.Status.Optimal) {
@@ -139,13 +146,7 @@ public class TSPTW_Model {
             System.out.println();
             System.out.println("Problem size: " + travel_time.length);
             System.out.println("Matrix of time distances is");
-            for (int i = 0; i < n; i++) {
-                System.out.println("Node: " + i);
-                for (int j = 0; j < n; j++) {
-                    System.out.print(" " + travel_time[i][j] + " ");
-                }
-                System.out.println();
-            }
+           
             System.out.println();
             System.out.println("Makespan " + model.getObjValue());
             System.out.println();
@@ -157,16 +158,19 @@ public class TSPTW_Model {
             System.out.println("The variables y_{ij} ");
             for (int i = 0; i < n; i++) {
                 for (int j = 0; j < n; j++) {
-                    //if (model.getValue(y[i][j])!=0 && i!=j) {
+                    if (i!=j) {
                     System.out.println("---->" + y[i][j].getName() + " " + model.getValue(y[i][j]));
 
-                    //}
+                    }
                 }
             }
 
         } else {
+            System.out.println();
             System.out.println("The problem status is: " + model.getStatus());
         }
 
     }
 }
+
+
