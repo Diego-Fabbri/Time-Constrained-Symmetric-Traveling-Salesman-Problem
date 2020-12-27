@@ -19,7 +19,7 @@ public class TSPTW_Model {
     protected double[][] travel_time;
     protected double[] LB;
     protected double[] UB;
-    protected IloIntVar[] t;
+    protected IloNumVar[] t;
     protected IloIntVar[][] y;
 
     TSPTW_Model(int problem_size, double t0, double[] LB, double[] UB, double[][] travel_time) throws IloException {
@@ -29,7 +29,7 @@ public class TSPTW_Model {
         this.LB = LB;
         this.UB = UB;
         this.model = new IloCplex();
-        this.t = new IloIntVar[n + 1];// t_i= 0....n+1
+        this.t = new IloNumVar[n + 1];// t_i= 0....n+1
         this.y = new IloIntVar[n][n];
 
     }
@@ -37,12 +37,12 @@ public class TSPTW_Model {
 
     protected void addVariables() throws IloException {
         for (int i = 0; i <= n; i++) {
-            t[i] = (IloIntVar) model.numVar(0, Double.MAX_VALUE, IloNumVarType.Float, "t[" + i + "]");
+            t[i] = (IloNumVar) model.numVar(0, Float.MAX_VALUE, IloNumVarType.Float, "t[" + i + "]");
 
         }
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-
+                 if(i!=j)
                 y[i][j] = (IloIntVar) model.numVar(0, 1, IloNumVarType.Int, "y[" + i + "][" + j + "]");
             }
 
