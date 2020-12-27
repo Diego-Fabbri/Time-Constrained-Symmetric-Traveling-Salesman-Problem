@@ -11,7 +11,8 @@ public class Main {
      public static void main(String[] args) throws IloException, FileNotFoundException{
      System.setOut(new PrintStream("STSPTW_Problem.log"));
      double [][] costs= Data.costs();
-     double [][] travel_times= Data.travel_times(costs);
+     double speed = Data.speed();
+     double [][] travel_times= Data.travel_times(costs,speed);
    
     int problem_size= Data.Problem_size();
     double[] LB=Data.Lower_Bounds();

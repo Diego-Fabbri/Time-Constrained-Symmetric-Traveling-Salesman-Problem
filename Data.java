@@ -13,11 +13,17 @@ public class Data {
         return 8; // depot + nodes to visit =|V|=n
     }
 
+    public static int speed() {
+        // we assume that costs are distances, and time travels on arcs (i,j)in A are proportional due to a costant speed
+// if costs are distances just set speed = 1
+
+        return 1;
+    }
+
     public static double[][] costs() {// matrix size 8x8
         // In this matrix triangle inequalities hold
         double[][] costs = {
-            
-          // 0   1     2      3     4     5     6     7     
+            // 0   1     2      3     4     5     6     7     
             {0, 27.9, 54.6, 42.0, 56.5, 37.0, 30.9, 34.1,},// Node 0 depot
             {27.9, 0, 67.2, 25.6, 28.8, 48.4, 57.4, 21.6,},// Node 1
             {54.6, 67.2, 0, 60.5, 95.8, 18.8, 60.4, 52.1,},// Node 2
@@ -28,32 +34,19 @@ public class Data {
             {34.1, 21.6, 52.1, 12.2, 44.4, 34.0, 59.3, 0}, // Node 7
         };
 
-
-
-
-
         return costs;
+    }
+
+    public static double[][] travel_times(double[][] costs, double speed) {
+        double[][] travel_times = new double[costs.length][costs[0].length];
+        for (int i = 0; i < travel_times.length; i++) {
+            for (int j = 0; j < travel_times[0].length; j++) {
+
+                travel_times[i][j] = costs[i][j] / speed;
+            }
+
         }
 
-
-
-
-    
-
-    public static double[][] travel_times(double[][] costs) {
-// we assume that costs are distances, and time travels on arcs (i,j)in A are proportional due to a costant speed
-// if costs are distances just set speed = 1
-        double speed = 1; // input
-        double[][] travel_times = new double[costs.length][costs[0].length];
-        for (int i = 0; i <travel_times.length; i++) {
-            for (int j =0; j < travel_times[0].length; j++) {
-
-                
-                    travel_times[i][j] = costs[i][j] / speed;
-                }
-
-            }
-        
         return travel_times;
     }
 
@@ -68,6 +61,3 @@ public class Data {
     }
 
 }
-
-
-
