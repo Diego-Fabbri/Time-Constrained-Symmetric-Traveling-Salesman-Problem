@@ -144,7 +144,7 @@ public class TSPTW_Model {
             System.out.println();
             System.out.println("Solution status = " + model.getStatus());
             System.out.println();
-            System.out.println("Problem size: " + travel_time.length);
+            System.out.println("Problem size: " + n);
             System.out.println("Matrix of time distances is");
            
             System.out.println();
@@ -155,15 +155,6 @@ public class TSPTW_Model {
             for (int i = 0; i <= n; i++) {
                 System.out.println("----> Node: " + i + " is visited at time " + model.getValue(t[i]) + "<---" + t[i].getName());
             }
-//            System.out.println("The variables y_{ij} ");
-//            for (int i = 0; i < n; i++) {
-//                for (int j = 0; j < n; j++) {
-//                    if (i!=j) {
-//                    System.out.println("---->" + y[i][j].getName() + " " + model.getValue(y[i][j]));
-//
-//                    }
-//                }
-//            }
 
         } else {
             System.out.println();
